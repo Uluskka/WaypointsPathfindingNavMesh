@@ -5,18 +5,18 @@ using UnityEngine;
 public class FollowPath : MonoBehaviour //Movimentação do objeto.
 {
     Transform goal; // pontos demarcados.
-    float speed= 5.0f; // velocidade do objeto.
-    float accuracy= 1.0f; // Serve para identificar o ponto determinado no mapa para ter a precisão da movimentação e o contorno referente ao ponto.
-    float rotSpeed= 2.0f; // Velocidade de rotação do objeto e suavizar a movimentação da rotação do tank 
+    float speed = 5.0f; // velocidade do objeto.
+    float accuracy = 1.0f; // Serve para identificar o ponto determinado no mapa para ter a precisão da movimentação e o contorno referente ao ponto.
+    float rotSpeed = 2.0f; // Velocidade de rotação do objeto e suavizar a movimentação da rotação do tank 
 
     public GameObject wpManager; //array.
     GameObject[] wps; //index.
     GameObject currentNode; // nodes demarcados.
-    int currentWP= 0; // define a origen a ser traçada inicialmente.
+    int currentWP = 0; // define a origen a ser traçada inicialmente.
     Graph g; // refencia do scripts criado Graph para completar a tarefa pela unity.
 
     void Start() // cada waypoint que ele identificar ele irar ter a movimentação desse gerencimento da demarcação dos pontos do array.
-        // identificar o caminho correto que o objeto deve percorrer.
+                 // identificar o caminho correto que o objeto deve percorrer.
     {
         wps = wpManager.GetComponent<WPManager>().waypoints;
         g = wpManager.GetComponent<WPManager>().graph;
@@ -25,16 +25,22 @@ public class FollowPath : MonoBehaviour //Movimentação do objeto.
     public void GoToHeli() // Trajetoria para heliporto.
     {
         g.AStar(currentNode, wps[1]); // algoritimo aplicado dentro do metodo
-        currentWP = 0; 
+        currentWP = 0;
     }
     public void GoToRuin() // Trajetoria para ruinas.
     {
         g.AStar(currentNode, wps[6]); // algoritimo aplicado dentro do metodo
-        currentWP = 0; 
+        currentWP = 0;
         currentWP = 0;
 
 
-    } 
+    }
+
+    public void casa()
+    {
+        g.AStar(currentNode, wps[3]); // algoritimo aplicado dentro do metodo
+        currentWP = 0;
+    }
     void LateUpdate()
     {
         // Verifica o tamanho do path.
